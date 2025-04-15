@@ -40,7 +40,7 @@ def main():
         analyze_results = AnalyzeResults(API_KEY)
         analyze_results.analyze()
         print("Analyze Completed!")
-    if(command == "--analyzeTFIDF") or (command == "--all"):
+    if(command == "--analyzeST") or (command == "--all"):
         analyze_results_st = AnalyzeResultsSentenceTransformer(API_KEY)
         analyze_results_st.analyze()
         print("Analyze Completed!")
