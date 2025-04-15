@@ -35,7 +35,7 @@ class AnalyzeResults:
                 matched_question = predicted_question_list[I[0][0]]
                 if float(D[0][0]) <= 0.2:
                     matched_questions.append([question, matched_question, float(D[0][0])])
-        file_path = "%s_%s_%s.txt" %(semester, exam, str(len(questions)))
+        file_path = "%s_%s_%s_FAISS.txt" %(semester, exam, str(len(questions)))
         matched_file_path = os.path.join("matched_questions", file_path)
         with open(matched_file_path, 'w') as f:
             for m_question in matched_questions:
