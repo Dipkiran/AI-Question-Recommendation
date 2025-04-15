@@ -1,0 +1,11 @@
+.env
+env
+\data
+\matched_questions
+\similar_questions
+\new_questions
+*.pdf
+exam_questions.txt
+new_questions.txt
+test_questions.txt
+train_questions.txt
