@@ -1,6 +1,7 @@
 .env
 env
 __pycache__
+\cs6620
 \data
 \matched_questions
 \similar_questions

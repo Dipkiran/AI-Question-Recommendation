@@ -12,7 +12,4 @@ Steps to run the script:
 4) --analyze command find the similar questions using FAISS with threshold 0.8.
 -> python main.py --analyze
 
-5) --analyzeST command find the similar questions using Sentence Transformer with threshold 0.8.
--> python main.py --analyzeST
-
-6) Run visualize_results.py to generate the visualization of data.
+5) Run visualize_results.py to generate the visualization of data.

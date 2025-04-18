@@ -1,11 +1,13 @@
 import openai
 import os
 import sys
+import nltk
+from nltk.corpus import stopwords
 
 from dotenv import load_dotenv
 import pandas as pd
 
-from generate_questions import QuestionGeneration
+from recommend_questions import QuestionRecommendation
 from exam_questions import ExamQuestions
 from similar_question import SimilarQuestion
 from analyze_results import AnalyzeResults
@@ -23,6 +25,9 @@ train_semesters = [
 test_semesters = ["Fa24"]
 exams = ["exam0", "exam1", "exam2", "exam3"]
 
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+
 def main():
     if(command == "--getQuestions") or (command == "--all"):
         exam_questions = ExamQuestions(instance_link, question_link, train_semesters, test_semesters)
@@ -32,17 +37,13 @@ def main():
         similar_questions = SimilarQuestion(API_KEY, train_semesters[-1])
         similar_questions.get_similar_questions()
         print("Completed!")
-    if(command == "--generateQuestions") or (command == "--all"):
-        generate_questions = QuestionGeneration(API_KEY)
-        generate_questions.generate_questions()
+    if(command == "--recommendQuestions") or (command == "--all"):
+        recommend_questions = QuestionRecommendation(API_KEY)
+        recommend_questions.recommend_questions()
         print("New question generation completed!")
     if(command == "--analyze") or (command == "--all"): 
         analyze_results = AnalyzeResults(API_KEY)
         analyze_results.analyze()
-        print("Analyze Completed!")
-    if(command == "--analyzeST") or (command == "--all"):
-        analyze_results_st = AnalyzeResultsSentenceTransformer(API_KEY)
-        analyze_results_st.analyze()
         print("Analyze Completed!")
 
 if __name__ == "__main__":

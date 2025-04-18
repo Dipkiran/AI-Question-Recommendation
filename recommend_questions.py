@@ -5,7 +5,7 @@ import json
 import tiktoken
 from tqdm import tqdm
 
-class QuestionGeneration:
+class QuestionRecommendation:
     def __init__(self, API_KEY):
         openai.api_key = API_KEY
 
@@ -35,9 +35,9 @@ class QuestionGeneration:
 
     def predict_question(self, input_data):
         prompt = f"""
-        You are a teacher of the Introduction to Programming course in Computer Science. Your job is to create a new exam question based on given questions:
+        You are a teacher of the Introduction to Programming course in Computer Science. Your job is to generate an exam question based on given questions:
         {input_data}
-        Generate only 1 question that follow the same structure and topic distribution.
+        Recommend only 1 question that follow the same structure and topic distribution.
         Ensure that the questions maintain logical flow and do not repeat exactly. Do not give answers or any feedback.
         """
         response = openai.chat.completions.create(
@@ -46,7 +46,7 @@ class QuestionGeneration:
         )
         return response.choices[0].message.content
 
-    def generate_questions(self):
+    def recommend_questions(self):
         ques_folder = "similar_questions"
         new_question_folder = "new_questions"
         if not os.path.isdir(new_question_folder):
