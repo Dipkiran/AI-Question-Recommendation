@@ -20,10 +20,16 @@ if os.path.isdir("matched_questions"):
             values.append([semester, exam, question_count, len(count), sim_type])
     df = pd.DataFrame(values, columns=['Semester', 'Exam', 'TotalQuestion', 'QuestionCount', "Type"])
     df['Accuracy'] = df['QuestionCount'] / df['TotalQuestion']
-    df_st = df[df['Type'] == "SentenceTransformer"]
-    print("Total Accuracy with Sentence Transformer: %f" %(df_st['QuestionCount'].sum()/df_st['TotalQuestion'].sum()))
-    df_faiss = df[df['Type'] == "FAISS"]
-    print("Total Accuracy with FAISS: %f" %(df_faiss['QuestionCount'].sum()/df_faiss['TotalQuestion'].sum()))
-    sns.barplot(df, x="Exam", y="Accuracy", hue="Type")
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15))
+    df['Accuracy'] = df['Accuracy'].round(2)
+    df['StopWords'] = False
+    df.loc[df['Type']=="StopWords", 'StopWords'] = True
+    df_nst = df[df['StopWords'] == False]
+    print("Total Accuracy with: %f" %(df_nst['QuestionCount'].sum()/df_nst['TotalQuestion'].sum()))
+    df_faiss = df[df['StopWords'] == True]
+    print("Total Accuracy with StopWords: %f" %(df_faiss['QuestionCount'].sum()/df_faiss['TotalQuestion'].sum()))
+    print(df)
+    ax = sns.barplot(df, x="Exam", y="Accuracy", hue="StopWords")
+    for i in ax.containers:
+        ax.bar_label(i,)
+    plt.legend(title= 'Stop Words', loc='upper center', bbox_to_anchor=(0.5, 1.17), ncol=2)
     plt.savefig("Analysis.pdf")

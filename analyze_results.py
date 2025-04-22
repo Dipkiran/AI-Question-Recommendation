@@ -33,7 +33,7 @@ class AnalyzeResults:
                 faiss.normalize_L2(question_embedding)
                 D, I = index.search(question_embedding, k=1)
                 matched_question = predicted_question_list[I[0][0]]
-                if float(D[0][0]) <= 0.2:
+                if float(D[0][0]) <= 0.3:
                     matched_questions.append([question, matched_question, float(D[0][0])])
         file_path = "%s_%s_%s_FAISS.txt" %(semester, exam, str(len(questions)))
         matched_file_path = os.path.join("matched_questions", file_path)

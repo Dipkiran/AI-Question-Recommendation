@@ -37,8 +37,8 @@ class QuestionRecommendation:
         prompt = f"""
         You are a teacher of the Introduction to Programming course in Computer Science. Your job is to generate an exam question based on given questions:
         {input_data}
-        Recommend only 1 question that follow the same structure and topic distribution.
-        Ensure that the questions maintain logical flow and do not repeat exactly. Do not give answers or any feedback.
+        Recommend only 1 question that follows the same structure and topic distribution.
+        Ensure that the questions maintain a logical flow and do not repeat exactly. Do not give answers or any feedback.
         """
         response = openai.chat.completions.create(
             model="gpt-4o",

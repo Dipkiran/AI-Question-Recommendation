@@ -11,7 +11,7 @@ from recommend_questions import QuestionRecommendation
 from exam_questions import ExamQuestions
 from similar_question import SimilarQuestion
 from analyze_results import AnalyzeResults
-from analyze_results_st import AnalyzeResultsSentenceTransformer
+from analyze_results_no_stopwords import AnalyzeResultsRemoveStopWords
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -32,11 +32,11 @@ def main():
     if(command == "--getQuestions") or (command == "--all"):
         exam_questions = ExamQuestions(instance_link, question_link, train_semesters, test_semesters)
         exam_questions.get_exam_questions()
-        print("Completed!")
+        print("Questionset generation Completed!")
     if(command == "--getSimilarQuestions") or (command == "--all"):
         similar_questions = SimilarQuestion(API_KEY, train_semesters[-1])
         similar_questions.get_similar_questions()
-        print("Completed!")
+        print("Get Similar words Completed!")
     if(command == "--recommendQuestions") or (command == "--all"):
         recommend_questions = QuestionRecommendation(API_KEY)
         recommend_questions.recommend_questions()
@@ -45,6 +45,10 @@ def main():
         analyze_results = AnalyzeResults(API_KEY)
         analyze_results.analyze()
         print("Analyze Completed!")
+    if(command == "--analyzeNoStopWords") or (command == "--all"):
+        analyze_results_st = AnalyzeResultsRemoveStopWords(API_KEY, set(stopwords.words('english')))
+        analyze_results_st.analyze()
+        print("Analyze Completed for No Stop Words!")
 
 if __name__ == "__main__":
     main()
