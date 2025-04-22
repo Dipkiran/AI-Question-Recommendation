@@ -12,8 +12,8 @@ Steps to run the script: (You can run step 1 to 5 using python main.py --all)
 4) --analyze command find the similar questions using FAISS with threshold 0.7.
 -> python main.py --analyze
 
-5)To run analysis after removing stop words use --analyzeNoStopWords.
+5) To run analysis after removing stop words use --analyzeNoStopWords.
 -> python main.py --analyzeNoStopWords
 
-5) Run visualize_results.py to generate the visualization of data.
+6) Run visualize_results.py to generate the visualization of data.
 -> python visualize_results.py
